@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+.git
+.gitignore
+*.md
+*.zip
+site
+extracted
+.DS_Store
+__MACOSX
+npm-debug.log*

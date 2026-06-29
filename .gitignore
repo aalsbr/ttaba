@@ -5,3 +5,14 @@ __MACOSX/
 # ملفات نظام ويندوز
 Thumbs.db
 desktop.ini
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+next-env.d.ts
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env*.local
+*.tsbuildinfo
