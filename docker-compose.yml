@@ -1,15 +1,19 @@
 # Coolify-ready compose file.
-# In Coolify: create a "Docker Compose" resource pointing at this repo.
-# Coolify injects its own proxy (Traefik) — set the domain in the Coolify UI.
+# In Coolify: create a "Docker Compose" resource pointing at this repo, then set
+# the domain to https://ttabba.com on the `web` service (port 80). Coolify's
+# Traefik proxy terminates TLS (Let's Encrypt) and routes the domain to the
+# container — so we only `expose` port 80 internally instead of publishing it.
 services:
   web:
     build:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
-    ports:
-      # host:container — Coolify maps the domain to container port 80.
-      - "3000:80"
+    environment:
+      # Coolify reads this to bind the domain to this service's port 80.
+      - SERVICE_FQDN_WEB=/
+    expose:
+      - "80"
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:80/"]
       interval: 30s
