@@ -49,7 +49,8 @@ section{position:relative}
 
 /* ---------- Navbar ---------- */
 header.nav{position:fixed;top:0;inset-inline:0;z-index:100;
-  background:rgba(255,255,255,.08);backdrop-filter:saturate(180%) blur(16px);
+  background:rgba(255,255,255,.08);
+  -webkit-backdrop-filter:saturate(180%) blur(16px);backdrop-filter:saturate(180%) blur(16px);
   border-bottom:1px solid rgba(0,0,0,.04);transition:background .3s,border-color .3s;}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:64px;}
 .brand .logo{height:34px;width:auto;transition:filter .3s}
@@ -300,9 +301,12 @@ footer{background:var(--bg);color:var(--text);padding:64px 0 32px;border-top:1px
   .hero{padding:110px 0 0}
   .doc-fields{flex-direction:column}
 }
-.mobile-menu{position:fixed;inset:0;background:rgba(255,255,255,.98);backdrop-filter:blur(10px);z-index:99;display:none;flex-direction:column;align-items:center;justify-content:center;gap:30px}
-.mobile-menu.open{display:flex}
+.mobile-menu{position:fixed;inset:0;background:rgba(255,255,255,.98);z-index:99;display:none;flex-direction:column;align-items:center;justify-content:center;gap:30px}
+/* Apply the blur only while open — a persistent hidden backdrop-filter layer
+   can flash a full-screen black box on iOS during scroll. */
+.mobile-menu.open{display:flex;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
 .mobile-menu a{color:var(--black);font-size:1.5rem;font-weight:700}
+.mobile-menu a.btn-dark{color:#fff}
 
 /* ---------- Clients carousel (marquee) ---------- */
 .clients{padding:64px 0 72px;background:var(--white);border-bottom:1px solid var(--line-soft)}
@@ -331,8 +335,9 @@ footer{background:var(--bg);color:var(--text);padding:64px 0 32px;border-top:1px
 
 /* ---------- Modal ---------- */
 .modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:24px;
-  background:rgba(0,0,0,.5);backdrop-filter:blur(6px)}
-.modal.open{display:flex}
+  background:rgba(0,0,0,.5)}
+/* Blur only while open (see mobile-menu note) to avoid iOS black-flash. */
+.modal.open{display:flex;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .modal-card{background:#fff;border-radius:var(--radius-lg);width:100%;max-width:460px;padding:38px;position:relative;
   max-height:92vh;overflow-y:auto;box-shadow:0 40px 90px -30px rgba(0,0,0,.5);animation:pop .3s cubic-bezier(.22,1,.36,1)}
 @keyframes pop{from{opacity:0;transform:translateY(20px) scale(.98)}to{opacity:1;transform:none}}
