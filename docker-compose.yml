@@ -1,17 +1,16 @@
 # Coolify-ready compose file.
-# In Coolify: create a "Docker Compose" resource pointing at this repo, then set
-# the domain to https://ttabba.com on the `web` service (port 80). Coolify's
-# Traefik proxy terminates TLS (Let's Encrypt) and routes the domain to the
-# container — so we only `expose` port 80 internally instead of publishing it.
+#
+# In Coolify, on the `web` service:
+#   • Domain:        https://ttabba.com
+#   • Ports Exposes: 80          <-- MUST be 80 (nginx listens on 80, not 3000)
+# Coolify's Traefik proxy terminates TLS (Let's Encrypt) and routes the domain
+# to container port 80. A "Bad Gateway" almost always means this port is wrong.
 services:
   web:
     build:
       context: .
       dockerfile: Dockerfile
     restart: unless-stopped
-    environment:
-      # Coolify reads this to bind the domain to this service's port 80.
-      - SERVICE_FQDN_WEB=/
     expose:
       - "80"
     healthcheck:
