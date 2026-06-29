@@ -12,7 +12,7 @@ export function TalkDemo() {
         </p>
         <div className="talk-actions reveal">
           <BookingLink className="btn btn-dark" as="button">احجز عرضًا</BookingLink>
-          <a href="mailto:info@tatabba.com" className="mail">
+          <a href="mailto:info@ttabba.com" className="mail">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <rect x="3" y="5" width="18" height="14" rx="2" />
               <path d="M3 7l9 6 9-6" />

@@ -9,7 +9,7 @@ const tajawal = Tajawal({
   variable: '--font-tajawal',
 });
 
-const SITE_URL = 'https://tatabba.com';
+const SITE_URL = 'https://ttabba.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
